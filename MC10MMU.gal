@@ -1,0 +1,49 @@
+# MMU for MC-10 512K
+
+# Pin assignment
+RST D0 D1 D2 D3 D4 D5 D6 D7 OE RW
+
+CE
+OE
+RW
+BUSY
+
+# LO-L7 is page select latch, read
+D0 := RW * LO14	
+D1 := RW * LO15
+D2 := RW * LO16
+D3 := RW * LO17
+D4 := RW * LO18
+#D5 := RW * LO19
+#D6 := RW * LO20
+#D7 := RW * LO21
+
+LO14 := /RW * D0					# LO is page select latch, write
+LO15 := /RW * D1
+LO16 := /RW * D2
+LO17 := /RW * D3
+LO18 := /RW * D4
+#LO19 := /RW * D5
+#LO20 := /RW * D6
+#LO21 := /RW * D7
+
+LO14 := /RST * 0					# LO is page select latch, reset
+LO15 := /RST * 0
+LO16 := /RST * 0
+LO17 := /RST * 0
+LO18 := /RST * 0
+#LO19 := /RST * 0
+#LO20 := /RST * 0
+#LO21 := /RST * 0
+
+PE := A14 * A15					# Page Enable
+AO14 := LO14 * PE * /OE			# Address line outputs
+AO15 := LO15 * PE * /OE
+AO16 := LO16 * PE * /OE
+AO17 := LO17 * PE * /OE
+AO18 := LO18 * PE * /OE
+#AO19 := LO18 * PE * /OE
+#AO20 := LO18 * PE * /OE
+#AO21 := LO18 * PE * /OE
+
+
